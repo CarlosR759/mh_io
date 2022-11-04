@@ -1,3 +1,5 @@
+import copy
+
 def lectura_instancia_del_problema():
     #Se abre archivo#
     fo = open("problema.txt", "r")
@@ -10,7 +12,7 @@ def lectura_instancia_del_problema():
     filas = int(filas)
     columnas = int(columnas)
 
-    aux = 0
+    aux = 1
     contador = 0     
     #Se leen los costos por columnas#
     costos_columnas = []
@@ -18,32 +20,35 @@ def lectura_instancia_del_problema():
         if(i == lines[0]):
             continue
         cadena = i.split()
-        costos_columnas.append(cadena)
-        contador += len(costos_columnas[aux])
+        costos_columnas.extend(cadena)
+        contador = len(costos_columnas)
         aux += 1
         if(contador == columnas):
             break;
-    
+   
     #Al final de bucle anterior. Aux tiene el número de línea#
     #en que quedó la lectura del archivo .txt#
-    aux += 1
     j = 0
     casosInstanciados = 0
-    vecinos = [ ]
-    
-    
+    vecinos = [ ] #Vecinos tiene los vecinos por area geográfica#
+    buffer = [ ] 
+     
     for i in lines:
-        vecinos.append(lines[aux])
-        total_vecinos = lines[aux]
-        aux +=1
-        vecinos.append(lines[aux].split() )    
-        aux +=1
+        buffer.append(lines[aux])
+        total_vecinos = int(lines[aux])
+        j = 0
+        while (j < total_vecinos):
+            aux +=1
+            buffer.extend(lines[aux].split() )
+            j = len(buffer) - 1
+        aux += 1
+        vecinos.append(copy.deepcopy(buffer) )
+        buffer.clear()
         if(aux >= len(lines) ):
             break
-    
-    
+      
     print("Lecutra de problema exitosa")
-    return "Se pueden devolver datos por la función correctamente"
+#    return "Se pueden devolver datos por la función correctamente"
 
          #FORMATO TXT#
 #El formato del .txt es el siguiente: #
@@ -55,5 +60,5 @@ def lectura_instancia_del_problema():
 # Línea para depurar programa#
     #print(filas)
     #print(columnas)
-    #print(costos_columnas)
-    #print(vecinos)
+    print(costos_columnas)
+    print(vecinos)
