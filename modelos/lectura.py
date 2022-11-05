@@ -20,19 +20,19 @@ def lectura_instancia_del_problema():
         if(i == lines[0]):
             continue
         cadena = i.split()
-        costos_columnas.extend(cadena)
+        costos_columnas.append(cadena)
         contador = len(costos_columnas)
         aux += 1
         if(contador == columnas):
             break;
-   
-    #Al final de bucle anterior. Aux tiene el número de línea#
+    
+    aux = 2  #Cometario: hay que ver que pasa con el aux, le puse el valor directamente#
     #en que quedó la lectura del archivo .txt#
     j = 0
     casosInstanciados = 0
     vecinos = [ ] #Vecinos tiene los vecinos por area geográfica#
     buffer = [ ] 
-     
+   
     for i in lines:
         buffer.append(lines[aux])
         total_vecinos = int(lines[aux])
@@ -48,7 +48,8 @@ def lectura_instancia_del_problema():
             break
       
     print("Lecutra de problema exitosa")
-#    return "Se pueden devolver datos por la función correctamente"
+    problema = costos_columnas + vecinos
+    return  problema
 
          #FORMATO TXT#
 #El formato del .txt es el siguiente: #
@@ -60,5 +61,5 @@ def lectura_instancia_del_problema():
 # Línea para depurar programa#
     #print(filas)
     #print(columnas)
-    print(costos_columnas)
-    print(vecinos)
+    #print(costos_columnas)
+    #print(vecinos)
