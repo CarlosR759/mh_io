@@ -1,6 +1,6 @@
 import numpy as np
 
-def solucion_aleatoria(problema):
+def solucion_aleatoria(problema, tabu_list):
 
     solucionFactible = False
     aux = 0 
@@ -12,15 +12,15 @@ def solucion_aleatoria(problema):
         while( (aux == 0) or (aux == 36) ):
             solucion = np.random.choice([0,1], size=(36))
             aux = solucion 
-        solucionFactible = comprobar_factibilidad(problema, solucion) 
+        solucionFactible = comprobar_factibilidad(problema, solucion, tabu_list) 
          
     return solucion 
 
 
-def comprobar_factibilidad(problema, solucion):
+def comprobar_factibilidad(problema, solucion, tabu_list):
     cobertura_del_area = [0] * 36
     es_factible = False
-
+    
     #Se comprueba que se están cubriendo todas las areas#
     for i in range(0,36):
         aux = solucion[i] 
@@ -37,8 +37,17 @@ def comprobar_factibilidad(problema, solucion):
             else:
                 cobertura_del_area[area - 2] = 1
    
+    
+    #Se comprueba que solución no sea tabú#
+    hay_repeticion = False
+    for i in range(0, len(tabu_list)):
+        if(str(tabu_list[i]) == solucion):
+            hay_repeticion = True
+
  
     #Salida de la función#
+    if(hay_repeticion == True):
+        return False
     print("Resultado: " + str(sum(cobertura_del_area)))
     return True
     if(sum(cobertura_del_area) == 36):

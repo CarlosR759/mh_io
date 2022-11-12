@@ -2,8 +2,21 @@ import numpy as np
 from .solucionAleatoria import solucion_aleatoria
 from .fitness import fitness
 
-def swap(solucion):
-    numero_aleatorio = np.random.uniform(low=0, high=1) 
+def swap(solucion, tabu_list):
+    #Aseguramos que swap entrega solución no tabu#
+    tabu = True
+    hay_repeticion = False;
+    while(tabu == True):
+        numero_aleatorio = np.random.uniform(low=0, high=1) 
+        hay_repeticion = False;
+        for i in range(0,len(tabu_list)):
+            if(tabu_list[i] == str(numero_aleatorio) ):
+                hay_repeticion = True;
+
+        if(hay_repeticion == False):
+            tabu = False 
+       
+ 
     diferencia_de_porcentaje = float(2.777777778)
     posicion_encontrada = False
     porcentaje = 2.777777778
@@ -40,8 +53,8 @@ def tabu_search(problema):
     intentos = 0
      
     while(intentos < 5):
-        #Se genera solución inicial de manera  aleatoría#
-        solucion_inicial = solucion_aleatoria(problema)    
+        #Se genera solución inicial de manera aleatoría#
+        solucion_inicial = solucion_aleatoria(problema, tabu_list)    
         fitness_solucion_inicial = fitness(problema[0],solucion_inicial) 
         print("fitness solucionInicial: ") 
         print( fitness_solucion_inicial)
@@ -58,7 +71,8 @@ def tabu_search(problema):
         fitness_mejor_vecino = fitness_solucion_inicial
         print("buffers: ")
         while(j < 36):
-            buffer = swap(solucion_inicial)    
+            buffer = swap(solucion_inicial,tabu_list)    
+            tabu_list.append(buffer)
             print(buffer)
             fitness_buffer = fitness(problema[0],buffer)
             if(fitness_buffer <= fitness_solucion_inicial):
@@ -81,12 +95,11 @@ def tabu_search(problema):
             mejor_solucion = mejor_vecino 
 
         intentos += 1 
-         
+
     return mejor_solucion
 
 
 # TO DO LIST#
 #1)Arreglar swap.
-#2)Implementar la lista tabu a la hora de descartar soluciones
 #3)Corregir problemas de lectura.
 #4)Luego de corregir punto 3, forzar función de busqueda aleatoria, que cumpla restricciones
