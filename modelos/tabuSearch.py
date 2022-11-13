@@ -1,5 +1,6 @@
 import numpy as np
 from .solucionAleatoria import solucion_aleatoria
+from .solucionAleatoria import comprobar_factibilidad
 from .fitness import fitness
 
 def swap(solucion, tabu_list):
@@ -67,6 +68,7 @@ def tabu_search(problema):
         #Se crean vecinos a la solución aleatoria por swap#
         #Se devuelve el mejor vecino al final del bucle#
         j = 0
+        es_factible = False
         mejor_vecino = solucion_inicial
         fitness_mejor_vecino = fitness_solucion_inicial
         print("buffers: ")
@@ -75,10 +77,14 @@ def tabu_search(problema):
             tabu_list.append(buffer)
             print(buffer)
             fitness_buffer = fitness(problema[0],buffer)
-            if(fitness_buffer <= fitness_solucion_inicial):
-               if(fitness_buffer <= fitness_mejor_vecino):
-                   mejor_vecino = buffer 
+            #Se comprueba si es factible#
+            es_factible = comprobar_factibilidad(problema,buffer,tabu_list)
+            if(es_factible == True):
+                if(fitness_buffer <= fitness_solucion_inicial):
+                    if(fitness_buffer <= fitness_mejor_vecino):
+                        mejor_vecino = buffer 
             j += 1 
+            es_factible = False
 
 
         #Mejor vecino de la solución inicial se deja en #
@@ -102,4 +108,5 @@ def tabu_search(problema):
 # TO DO LIST#
 #1)Arreglar swap.
 #3)Corregir problemas de lectura.
-#4)Luego de corregir punto 3, forzar función de busqueda aleatoria, que cumpla restricciones
+#4)Luego de corregir punto 3, forzar función de busqueda aleatoria, que cumpla restricciones.
+#PUNTO 4 LISTO. HAY QUE VERIFICAR QUE SE REALIZA BIEN.
