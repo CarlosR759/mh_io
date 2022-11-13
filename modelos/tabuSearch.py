@@ -1,7 +1,6 @@
 import numpy as np
 import copy
 from .solucionAleatoria import solucion_aleatoria
-from .solucionAleatoria import comprobar_factibilidad
 from .fitness import fitness
 
 def bitFlip(solucion,problema,bit):
@@ -97,24 +96,19 @@ def tabu_search(problema):
         #Se crean vecinos a la solución aleatoria por swap#
         #Se devuelve el mejor vecino al final del bucle#
         j = 0
-        mejor_vecino = copy.deepcopy(solucion_inicial)
-        
+        mejor_vecino = solucion_inicial
+        fitness_mejor_vecino = fitness_solucion_inicial
         print("buffers: ")
         while(j < 36):
-            print("")
-            
-            print("La solucion inicial es: ", solucion_inicial)
-            print("")
-
-            buffer = bitFlip(solucion_inicial,problema,j)    
-            #tabu_list.append(buffer)
-            #print(buffer)
-            #fitness_buffer = fitness(problema[0],buffer)
-            #if(fitness_buffer <= fitness_solucion_inicial):
-            #   if(fitness_buffer <= fitness_mejor_vecino):
-            #       mejor_vecino = buffer 
+            buffer = swap(solucion_inicial,tabu_list)    
+            tabu_list.append(buffer)
+            print(buffer)
+            fitness_buffer = fitness(problema[0],buffer)
+            if(fitness_buffer <= fitness_solucion_inicial):
+               if(fitness_buffer <= fitness_mejor_vecino):
+                   mejor_vecino = buffer 
             j += 1 
-        print("ya se fue==========================================================================")
+
 
         #Mejor vecino de la solución inicial se deja en #
         #conjunto con la solución inicial en la tabu_list#
@@ -139,4 +133,5 @@ def tabu_search(problema):
 # TO DO LIST#
 #1)Arreglar swap.
 #3)Corregir problemas de lectura.
-#4)Luego de corregir punto 3, forzar función de busqueda aleatoria, que cumpla restricciones
+#4)Luego de corregir punto 3, forzar función de busqueda aleatoria, que cumpla restricciones.
+#PUNTO 4 LISTO. HAY QUE VERIFICAR QUE SE REALIZA BIEN.
