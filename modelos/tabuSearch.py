@@ -21,7 +21,7 @@ def bitFlip(solucion,problema,bit):
         solucionNueva[bit]=0
 
     print("")
-    print("La solucion cambiada es: ",solucion)
+    print("La solucion cambiada es: ",solucionNueva)
     print("")
     return solucionNueva 
     #if(comprobar_factibilidad(problema,solucionMala,tabu_list)):
@@ -85,28 +85,26 @@ def tabu_search(problema):
         #Se genera solución inicial de manera aleatoría#
         solucion_inicial = solucion_aleatoria(problema, tabu_list)    
         fitness_solucion_inicial = fitness(problema[0],solucion_inicial) 
+        print("la solucion inicial es ")
+        print(solucion_inicial)
         print("fitness solucionInicial: ") 
         print( fitness_solucion_inicial)
         if(intentos == 0):
             mejor_solucion = copy.deepcopy(solucion_inicial)
-        
-        print(solucion_inicial)
-
-
-        #Se crean vecinos a la solución aleatoria por swap#
-        #Se devuelve el mejor vecino al final del bucle#
+        #Se crean vecinos a la solución aleatoria por bitFlip#
         j = 0
-        mejor_vecino = solucion_inicial
-        fitness_mejor_vecino = fitness_solucion_inicial
-        print("buffers: ")
+        mejor_vecino = copy.deepcopy(solucion_inicial)
+        fitness_mejor_vecino = copy.deepcopy(fitness_solucion_inicial)
+
+
         while(j < 36):
-            buffer = swap(solucion_inicial,tabu_list)    
+            buffer = bitFlip(solucion_inicial,tabu_list,j)    
             tabu_list.append(buffer)
             print(buffer)
             fitness_buffer = fitness(problema[0],buffer)
             if(fitness_buffer <= fitness_solucion_inicial):
                if(fitness_buffer <= fitness_mejor_vecino):
-                   mejor_vecino = buffer 
+                   mejor_vecino = copy.deepcopy(buffer) 
             j += 1 
 
 
@@ -126,6 +124,15 @@ def tabu_search(problema):
         intentos += 1 
    
     return mejor_solucion
+
+
+
+
+# TO DO LIST#
+#1)Arreglar swap.
+#3)Corregir problemas de lectura.
+#4)Luego de corregir punto 3, forzar función de busqueda aleatoria, que cumpla restricciones.
+#PUNTO 4 LISTO. HAY QUE VERIFICAR QUE SE REALIZA BIEN.
 
 
 
