@@ -6,72 +6,25 @@ from .fitness import fitness
 def bitFlip(solucion,problema,bit):
     solucionMala=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     solucionNueva=copy.deepcopy(solucion)
-    print("-------------Comenzando el bitFlip")
-    print("la soluncion es: " , solucion)
-    print("Se cambia el bit: ", bit)
-    print("el valor del bit a cambiar: ",solucion[bit])
+    #print("-------------Comenzando el bitFlip")
+    #print("la soluncion es: " , solucion)
+    #print("Se cambia el bit: ", bit)
+    #print("el valor del bit a cambiar: ",solucion[bit])
     done=0
     if(solucionNueva[bit]==0):
-        print("pasa por if 1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+     #   print("pasa por if 1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
         solucionNueva[bit]=1
         done=1
     if(solucionNueva[bit]==1 and done==0):
-        print("pasa por if  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+      #  print("pasa por if  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 
         solucionNueva[bit]=0
 
-    print("")
-    print("La solucion cambiada es: ",solucionNueva)
-    print("")
-    return solucionNueva 
-    #if(comprobar_factibilidad(problema,solucionMala,tabu_list)):
-    #    print("Es factible")
-    #else:
-    #    print("no es factible")
     #print("")
+    #print("La solucion cambiada es: ",solucionNueva)
+    #print("")
+    return solucionNueva 
 
-    
-    #Aseguramos que swap entrega solución no tabu#
-    #tabu = True
-    #hay_repeticion = False;
-    #while(tabu == True):
-    #    numero_aleatorio = np.random.uniform(low=0, high=1) 
-    #    hay_repeticion = False;
-    #    for i in range(0,len(tabu_list)):
-    #        if(tabu_list[i] == str(numero_aleatorio) ):
-    #            hay_repeticion = True;
-
-    #    if(hay_repeticion == False):
-     #       tabu = False 
-       
- 
-    #iferencia_de_porcentaje = float(2.777777778)
-    #posicion_encontrada = False
-    #porcentaje = 2.777777778
-    #k = 1#Índice de la lista a recorrer# 
-
-    #Swap para números que cubren solo primera casilla#
-    #if(numero_aleatorio <=  2.777777778):
-    #    if(solucion[0] == 1):
-    #        solucion[0] == 0
-    #    else:
-    #        solucion[0] == 1
-    #    return solucion
-
-
-    #Swap para encontrar casilla a modificar#
-    #while(posicion_encontrada == False):
-    #    porcentaje += 2.777777778 
-    #    if((numero_aleatorio * 100) > porcentaje):
-    #        k += 1 
-    #    else:
-    #       if(solucion[k-1] == 0):
-    #           solucion[k-1] = 1 
-    #        else:
-    #            solucion[k-1] = 0
-    #        posicion_encontrada = True
-
-    #Se entrega solución con solo un bit cambiado# 
     
 
 def tabu_search(problema):
@@ -81,30 +34,29 @@ def tabu_search(problema):
     iteraciones = 5 #Parametro de iteraciones del tabuSearch#
     intentos = 0
      
-    while(intentos < 5):
+    while(intentos < 10):
         #Se genera solución inicial de manera aleatoría#
         solucion_inicial = solucion_aleatoria(problema, tabu_list)    
-        fitness_solucion_inicial = fitness(problema[0],solucion_inicial) 
+        costo_solucion_inicial = costoTorres(problema,solucion_inicial) 
         print("la solucion inicial es ")
         print(solucion_inicial)
-        print("fitness solucionInicial: ") 
-        print( fitness_solucion_inicial)
+        print("costo solucionInicial: ") 
+        
         if(intentos == 0):
             mejor_solucion = copy.deepcopy(solucion_inicial)
         #Se crean vecinos a la solución aleatoria por bitFlip#
         j = 0
         mejor_vecino = copy.deepcopy(solucion_inicial)
-        fitness_mejor_vecino = copy.deepcopy(fitness_solucion_inicial)
+        #fitness_mejor_vecino = copy.deepcopy(fitness_solucion_inicial)
 
 
         while(j < 36):
             buffer = bitFlip(solucion_inicial,tabu_list,j)    
             tabu_list.append(buffer)
-            print(buffer)
-            fitness_buffer = fitness(problema[0],buffer)
-            if(fitness_buffer <= fitness_solucion_inicial):
-               if(fitness_buffer <= fitness_mejor_vecino):
-                   mejor_vecino = copy.deepcopy(buffer) 
+            print("La lista original es: ", solucion_inicial)
+            print("La lista cambiada es: ", buffer)
+
+            
             j += 1 
 
 
@@ -125,7 +77,17 @@ def tabu_search(problema):
    
     return mejor_solucion
 
-
+def costoTorres(problema,solucion):
+ print("Comienza a calcular el costo")
+ i=36
+ while(i<72):
+    if((i-34)<32):
+       print("Antena " , (i-34) , ": ", problema[i])
+       i+=1
+       print("el costo es: ", problema[0][i-37])
+    else:
+        print("Antena " , (i-33) , ": ", problema[i])
+        i+=1
 
 
 # TO DO LIST#
@@ -141,4 +103,4 @@ def tabu_search(problema):
 #1)Arreglar swap.
 #3)Corregir problemas de lectura.
 #4)Luego de corregir punto 3, forzar función de busqueda aleatoria, que cumpla restricciones.
-#PUNTO 4 LISTO. HAY QUE VERIFICAR QUE SE REALIZA BIEN.
+#PUNTO 4 LISTO. HAY QUE VERIFICAR QUE SE REALIZA BIEN
