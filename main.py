@@ -16,11 +16,11 @@ def resolver_scp():
     ##print(problema[0])
     ## se intercala la cantidad de vecinos y los vecinos
     ## hay 36 filas con el primer dig la cantidad de vecinos y despues los vecinos
-    #i=0
-    #while(i<72):
-    #    print("Fila " , i , ": ", problema[i])
-    #    i+=1
-    #print("-----------------------------------------------------------")
+    i=0
+    while(i<72):
+       print("Antena " , i-34 , ": ", problema[i])
+       i+=1
+    print("-----------------------------------------------------------")
 
     solucion = tabu_search(problema)
     print("solucion encontrada: ")
