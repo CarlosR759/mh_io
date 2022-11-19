@@ -28,7 +28,7 @@ def comprobar_factibilidad(problema, solucion, tabu_list):
             continue
         cadena = problema[i+2]
         dimension = len(cadena)
-        print("cadena: "+ str(cadena))
+        #print("cadena: "+ str(cadena))
         for j in range(0,dimension):
             area = int(cadena[int(j)])
             #Se posicionan soluciones correctamente en lista#
