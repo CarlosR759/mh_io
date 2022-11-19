@@ -30,7 +30,7 @@ def tabu_search(problema):
     #la lista va a tener las ultimas 15 iteraciones de las soluciones generadas aleatoriamente
     tabu_list = []
     mejor_solucion = []
-    iteraciones = 10000 #Parametro de iteraciones del tabuSearch#
+    iteraciones = 5000 #Parametro de iteraciones del tabuSearch#
     intentos = 0
      
     while(intentos < iteraciones):
