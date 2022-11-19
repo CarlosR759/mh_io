@@ -30,13 +30,16 @@ def tabu_search(problema):
     #la lista va a tener las ultimas 15 iteraciones de las soluciones generadas aleatoriamente
     tabu_list = []
     mejor_solucion = []
-    iteraciones = 100 #Parametro de iteraciones del tabuSearch#
+    iteraciones = 10000 #Parametro de iteraciones del tabuSearch#
     intentos = 0
      
     while(intentos < iteraciones):
         #Se genera solución inicial de manera aleatoría#
         solucion_inicial = solucion_aleatoria(problema, tabu_list)   
         tabu_list.append(solucion_inicial) 
+        if(len(tabu_list)>15):
+            tabu_list.pop(0)
+
         #print("la solucion inicial es ")
         #print(solucion_inicial)
         #print("costo solucionInicial: ") 
