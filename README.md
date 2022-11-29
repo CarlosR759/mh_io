@@ -18,4 +18,6 @@ pip install numpy
 
 Guía oficial de numpy: https://numpy.org/install/
 
+Documento en formato overleaf: https://www.overleaf.com/read/rhsdnbgnzkyh
+
 Integrantes: Carlos Ruiz y Alex Otto.
