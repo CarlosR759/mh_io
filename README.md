@@ -20,4 +20,7 @@ Guía oficial de numpy: https://numpy.org/install/
 
 Documento en formato overleaf: https://www.overleaf.com/read/rhsdnbgnzkyh
 
+
+En el código se dejan algunas líneas comentadas con la función print en estas. Se dejan a propósito con la intención de revisar más facilmente que cada función del código está haciendo las cosas correctamente. Por ende son líneas que si descomentan sirven para depuración. Se dejan con la finalidad de facilitar evaluación de este trabajo.
+
 Integrantes: Carlos Ruiz y Alex Otto.
