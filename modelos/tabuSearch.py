@@ -5,23 +5,17 @@ from .fitness import fitness
 
 def bitFlip(solucion,problema,bit):
     solucionNueva=copy.deepcopy(solucion)
-    #print("-------------Comenzando el bitFlip")
-    #print("la soluncion es: " , solucion)
-    #print("Se cambia el bit: ", bit)
-    #print("el valor del bit a cambiar: ",solucion[bit])
+   
     done=0
     if(solucionNueva[bit]==0):
-     #   print("pasa por if 1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
         solucionNueva[bit]=1
         done=1
     if(solucionNueva[bit]==1 and done==0):
-      #  print("pasa por if  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-
         solucionNueva[bit]=0
 
-    #print("")
+    
     #print("La solucion cambiada es: ",solucionNueva)
-    #print("")
+   
     return solucionNueva 
 
     
@@ -98,29 +92,3 @@ def factibilidad(problema,solucion):
     return False
 #print("ordenada y eliminada duplicados")
 #factibilidad=sorted(set(factibilidad))
-
-# TO DO LIST#
-
-#3)Corregir problemas de lectura.
-
-
-
-
-
-
-# TO DO LIST#
-#1)Arreglar swap.
-#3)Corregir problemas de lectura.
-#4)Luego de corregir punto 3, forzar función de busqueda aleatoria, que cumpla restricciones.
-#PUNTO 4 LISTO. HAY QUE VERIFICAR QUE SE REALIZA BIEN
-#i=36
-# j=0
-# while(i<72):
-#    if((i-34)<32):
- #      print("Antena " , (i-34) , ": ", problema[i])
- #      i+=1
- #      print("el costo es: ", problema[0][i-37])
-#    else:
-#        print("Antena " , (i-33) , ": ", problema[i])
-#        print("el costo es: ", problema[0][i-36])
-#        i+=1
